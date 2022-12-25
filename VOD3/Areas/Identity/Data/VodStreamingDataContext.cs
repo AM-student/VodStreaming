@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using VodStreaming.Areas.Identity.Data;
+using VodStreaming.Models;
 
 namespace VodStreaming.Areas.Identity.Data;
 
@@ -12,7 +13,8 @@ public class VodStreamingDataContext : IdentityDbContext<VodStreamingUsers>
         : base(options)
     {
     }
-
+    public DbSet<Video> videos { get; set; }
+    public DbSet<Category> categories { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
