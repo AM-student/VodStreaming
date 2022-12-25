@@ -11,85 +11,85 @@ using VodStreaming.Models;
 
 namespace VodStreaming.Controllers
 {
-    public class CategoriesController : Controller
+    public class UserController : Controller
     {
         private readonly VodStreamingDataContext _context;
 
-        public CategoriesController(VodStreamingDataContext context)
+        public UserController(VodStreamingDataContext context)
         {
             _context = context;
         }
 
-        // GET: categories
+        // GET: AspNetUsers
         public async Task<IActionResult> Index()
         {
-              return View(await _context.categories.ToListAsync());
+              return View(await _context.AspNetUsers.ToListAsync());
         }
 
-        // GET: categories/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: AspNetUsers/Details/5
+        public async Task<IActionResult> Details(string? id)
         {
-            if (id == null || _context.categories == null)
+            if (id == null || _context.AspNetUsers == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.categories
-                .FirstOrDefaultAsync(m => m.CategoryID == id);
-            if (category == null)
+            var vodStreamingUsers = await _context.AspNetUsers
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (vodStreamingUsers == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(vodStreamingUsers);
         }
 
-        // GET: categories/Create
+        // GET: AspNetUsers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: categories/Create
+        // POST: AspNetUsers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryID,CategoryName")] Category category)
+        public async Task<IActionResult> Create(VodStreamingUsers vodStreamingUsers)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
+                _context.Add(vodStreamingUsers);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(vodStreamingUsers);
         }
 
-        // GET: categories/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: AspNetUsers/Edit/5
+        public async Task<IActionResult> Edit(string? id)
         {
-            if (id == null || _context.categories == null)
+            if (id == null || _context.AspNetUsers == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.categories.FindAsync(id);
-            if (category == null)
+            var vodStreamingUsers = await _context.AspNetUsers.FindAsync(id);
+            if (vodStreamingUsers == null)
             {
                 return NotFound();
             }
-            return View(category);
+            return View(vodStreamingUsers);
         }
 
-        // POST: categories/Edit/5
+        // POST: AspNetUsers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryID,CategoryName")] Category category)
+        public async Task<IActionResult> Edit(string id,  VodStreamingUsers vodStreamingUsers)
         {
-            if (id != category.CategoryID)
+            if (id != vodStreamingUsers.Id)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace VodStreaming.Controllers
             {
                 try
                 {
-                    _context.Update(category);
+                    _context.Update(vodStreamingUsers);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.CategoryID))
+                    if (!VodStreamingUsersExists(vodStreamingUsers.Id))
                     {
                         return NotFound();
                     }
@@ -114,49 +114,49 @@ namespace VodStreaming.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(vodStreamingUsers);
         }
 
-        // GET: categories/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: AspNetUsers/Delete/5
+        public async Task<IActionResult> Delete(string? id)
         {
-            if (id == null || _context.categories == null)
+            if (id == null || _context.AspNetUsers == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.categories
-                .FirstOrDefaultAsync(m => m.CategoryID == id);
-            if (category == null)
+            var vodStreamingUsers = await _context.AspNetUsers
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (vodStreamingUsers == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(vodStreamingUsers);
         }
 
-        // POST: categories/Delete/5
+        // POST: AspNetUsers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.categories == null)
+            if (_context.AspNetUsers == null)
             {
-                return Problem("Entity set 'VodStreamingDataContext.categories'  is null.");
+                return Problem("Entity set 'VodStreamingDataContext.AspNetUsers'  is null.");
             }
-            var category = await _context.categories.FindAsync(id);
-            if (category != null)
+            var vodStreamingUsers = await _context.AspNetUsers.FindAsync(id);
+            if (vodStreamingUsers != null)
             {
-                _context.categories.Remove(category);
+                _context.AspNetUsers.Remove(vodStreamingUsers);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
+        private bool VodStreamingUsersExists(string id)
         {
-          return _context.categories.Any(e => e.CategoryID == id);
+          return _context.AspNetUsers.Any(e => e.Id == id);
         }
     }
 }

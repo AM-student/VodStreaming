@@ -10,7 +10,7 @@ namespace VodStreaming.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "categories",
+                name: "AspNetUsers",
                 columns: table => new
                 {
                     CategoryID = table.Column<int>(type: "int", nullable: false)
@@ -19,7 +19,7 @@ namespace VodStreaming.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_categories", x => x.CategoryID);
+                    table.PrimaryKey("PK_AspNetUsers", x => x.CategoryID);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,9 +39,9 @@ namespace VodStreaming.Migrations
                 {
                     table.PrimaryKey("PK_videos", x => x.VideoID);
                     table.ForeignKey(
-                        name: "FK_videos_categories_CategoryID",
+                        name: "FK_videos_AspNetUsers_CategoryID",
                         column: x => x.CategoryID,
-                        principalTable: "categories",
+                        principalTable: "AspNetUsers",
                         principalColumn: "CategoryID");
                 });
 
@@ -57,7 +57,7 @@ namespace VodStreaming.Migrations
                 name: "videos");
 
             migrationBuilder.DropTable(
-                name: "categories");
+                name: "AspNetUsers");
         }
     }
 }

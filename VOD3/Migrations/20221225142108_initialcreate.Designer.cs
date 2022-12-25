@@ -6,12 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VodStreaming;
+using VodStreaming.Areas.Identity.Data;
 
 #nullable disable
 
 namespace VodStreaming.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(VodStreamingDataContext))]
     [Migration("20221225142108_initialcreate")]
     partial class initialcreate
     {
@@ -38,7 +39,7 @@ namespace VodStreaming.Migrations
 
                     b.HasKey("CategoryID");
 
-                    b.ToTable("categories");
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("VodStreaming.Models.Video", b =>

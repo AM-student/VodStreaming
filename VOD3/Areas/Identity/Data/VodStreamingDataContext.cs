@@ -15,6 +15,7 @@ public class VodStreamingDataContext : IdentityDbContext<VodStreamingUsers>
     }
     public DbSet<Video> videos { get; set; }
     public DbSet<Category> categories { get; set; }
+    public DbSet<VodStreamingUsers> AspNetUsers{ get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -36,4 +37,6 @@ public class VodStreamingDataContext : IdentityDbContext<VodStreamingUsers>
 
         }
     }
+
+    public DbSet<VodStreaming.Models.Users> Users { get; set; }
 }
